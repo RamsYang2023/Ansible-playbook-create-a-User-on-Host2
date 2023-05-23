@@ -1,0 +1,25 @@
+---
+-	name: Create a user ‘test’ with sudo privilege
+  hosts: host2
+  become: yes
+  become_method: su
+
+  tasks:
+   - name: create the user ‘test’ 
+     user:
+       name: test
+       password: “123123”
+       createhome: yes
+       shell: /bin/bash
+
+   - name: Add ‘test’ user to sudo privilege
+     lineinfile: 
+        dest: /etc/sudoers
+        line: “test ALL=(ALL) NOPASSWORD: ALL”
+
+   - name: set home directory for ‘test’ user
+     file:
+       path: /home/test
+       owner: test
+       group: test
+       state: directory
