@@ -1,5 +1,5 @@
 ---
--	name: Create a user ‘test’ with sudo privilege
+- name: Create a user ‘test’ with sudo privilege
   hosts: host2
   become: yes
   become_method: su
